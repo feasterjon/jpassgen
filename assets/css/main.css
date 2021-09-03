@@ -1,0 +1,34 @@
+body {
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+}
+
+header {
+  margin-bottom: 1rem;
+  border-bottom-width: 0.0625em;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(192, 192, 192);
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+}
+
+footer, div.hr, #help {
+  margin-top: 1rem;
+  border-top-width: 0.0625em;
+  border-top-style: solid;
+  border-top-color: rgb(192, 192, 192);
+  border-top-color: rgba(0, 0, 0, 0.25);
+}
+
+footer {
+  text-align: center;
+}
+
+div.hr {
+  margin-bottom: 1rem;
+}
+
+.template, label.output {
+  display: none;
+}

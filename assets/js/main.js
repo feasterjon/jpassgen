@@ -3,8 +3,9 @@ const data = {
   "enableCreds": true,
   "localDB": "jPasswordGen",
   "templateId": "template",
-  "saveId": "save",
+  "saveId": "flexSwitchCheckChecked",
   "outputId": "output",
+  "helpContentId": "help",
   "templateFields": {
     "lengthId": "length",
     "lettersLowerId": "letters-lower",
@@ -15,7 +16,9 @@ const data = {
   },
     "templateButtons": {
     "submitId": "button-generate",
-    "resetId": "button-reset"
+    "copyId": "button-copy",
+    "resetId": "button-reset",
+    "helpId": "button-help"
   }
 };
 const jPasswordGen = new main.App.init(data);

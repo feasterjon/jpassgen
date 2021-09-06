@@ -2,7 +2,6 @@ body {
   width: 100%;
   max-width: 68rem;
   margin: 0 auto;
-  background-color: #f8f9fa;
 }
 
 header {
@@ -29,6 +28,10 @@ div.hr {
   margin-bottom: 1rem;
 }
 
-.template, label.output {
+.template, #help {
   display: none;
+}
+
+#output {
+  height: 12em;
 }

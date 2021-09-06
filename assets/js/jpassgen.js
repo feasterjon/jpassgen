@@ -2,7 +2,7 @@
 
 /*
 Main
-Updated: 2021-09-03
+Updated: 2021-09-06
 */
 
 window.main = window.main || {}; // namespace
@@ -17,7 +17,13 @@ main.App = (function() { // class
     if (typeof data !== 'undefined') {
       document.body.innerHTML = document.getElementById(data.templateId).innerHTML;
       main.Events.click(data.templateButtons.submitId, gen);
+      main.Events.click(data.templateButtons.copyId, function(){
+        main.Tasks.copyClip(data.outputId, data.templateButtons.copyId);
+      });
       main.Events.click(data.templateButtons.resetId, reset);
+      main.Events.click(data.templateButtons.helpId, function() {
+        main.Effects.toggle(data.helpContentId);
+      });
       if (typeof main.Data.read(data.localDB + '-' + data.saveId) !== 'undefined') {
         let query;
         let values = Object.values(data.templateFields);
@@ -148,9 +154,30 @@ main.App = (function() { // class
   }
 
   return {
-  init: init
+    init: init
   };
 
+})();
+
+main.Effects = (function() { // class
+    
+  // toggle
+  function toggle(id) {
+          
+    const element = document.getElementById(id);
+            
+    if (element.style.display === 'block') {
+      element.style.display = 'none';
+    }
+    else {
+      element.style.display = 'block';
+    }
+  }
+        
+  return {
+    toggle: toggle
+  };
+    
 })();
     
 main.Events = (function() { // class
@@ -169,7 +196,36 @@ main.Events = (function() { // class
   }
           
   return {
-  click: click
+    click: click
+  };
+      
+})();
+
+main.Tasks = (function() { // class
+        
+  // copy to clipbord
+  function copyClip(id, copyId) {
+            
+    const element = document.getElementById(id);
+              
+    element.select();
+    element.setSelectionRange(0, 99999); /* For mobile devices */
+    navigator.clipboard.writeText(element.value);
+    if (typeof(copyId) !== 'undefined') {
+      const copyElement = document.getElementById(copyId);
+      const defaultInnerHTML = copyElement.innerHTML;
+      copyElement.disabled = true;
+      copyElement.innerHTML = "Copied!";
+      copyElement.focus();
+      setTimeout(function(){
+        copyElement.innerHTML = defaultInnerHTML;
+        copyElement.disabled = false;
+      }, 1000);
+    }
+  }
+          
+  return {
+    copyClip: copyClip
   };
       
 })();

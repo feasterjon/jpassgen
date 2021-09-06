@@ -4,7 +4,7 @@
     <title>JPassword Generator</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="JPassword Generator (Ver. 6.0.0)" />
+    <meta name="description" content="JPassword Generator (Ver. 6.0.1)" />
     <meta name="keywords" content="password, generator, information, security, randomizer, authentication, infosec" />
     <meta name="author" content="Jonathan Feaster" />
     <!-- Author : Jonathan Feaster, Bit Designer -->
@@ -15,41 +15,49 @@
   </head>
   <body>
     <div class="container">
-      <p><strong>Loading&#8230;</strong></p>
-      <noscript><p><strong>JavaScript is required to access this resource.</strong></p></noscript>
+      <p class="text-center"><strong>Loading&#8230;</strong></p>
+      <noscript><p class="text-center"><strong>JavaScript is required to access this resource.</strong></p></noscript>
     </div>
     <div id="template" class="template">
       <div class="container">
-        <header><h1>JPassword Generator</h1></header>
+        <header><h1 class="p-1">JPassword Generator</h1></header>
         <div id="main">
           <div id="app">
-            <div class="input-group">
-              <label for="output" class="output">Password(s)</label><textarea id="output" name="output" readonly="readonly" class="form-control"></textarea>
-              <div class="input-group-append">
-                <button id="button-generate" class="w-100 btn btn-primary">Generate</button>
-                <button id="button-reset" class="w-100 btn btn-outline-primary">Reset</button>
+            <div  class="form-group row">
+              <label for="output" class="form-label col-form-label">Password(s)</label>
+            </div>
+            <div  class="form-group row">
+              <div class="col-sm-10">
+                <textarea id="output" name="output" readonly="readonly" class="w-100 form-control"></textarea>
+              </div>
+              <div class="col-sm-2">
+                <button id="button-generate" class="w-100 btn btn-primary mt-2">Generate</button>
+                <button id="button-copy" class="w-100 btn btn-outline-primary mt-2">Copy</button>
+                <button id="button-reset" class="w-100 btn btn-outline-primary mt-2">Reset</button>
+                <button id="button-help" class="w-100 btn btn-outline-primary mt-2">Help</button>
               </div>
             </div>
-            <div class="hr"></div>
-            <div  class="form-group row">
-              <div class="col-sm-5"><label for="length" class="form-label">Length</label><input type="number" id="length" name="length" value="10" min="5" class="form-control" /></div>
-              <div class="col-sm-5"><label for="amount" class="form-label">Amount</label><input type="number" id="amount" name="amount" value="1" min="1" class="form-control" /></div>
-              <div class="col-sm-2 form-check"><label for="save" class="form-check-label">Save Settings</label><input type="checkbox" id="save" name="save" value="save" class="form-check-input" /></div>
-            </div>
-            <div class="hr"></div>
-            <div  class="form-group row">
-              <div class="col-sm-6"><label for="letters-lower" class="form-label">Lowercase Letters</label><input type="text" id="letters-lower" name="letters-lower" value="abcdefghijklmnopqrstuvwxyz" class="form-control" /></div>
-              <div class="col-sm-6"><label for="letters-upper" class="form-label">Uppercase Letters</label><input type="text" id="letters-upper" name="letters-upper" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ" class="form-control" /></div>
-            </div>
-            <div  class="form-group row">
-              <div class="col-sm-6"><label for="numbers">Numbers</label><input type="text" id="numbers" name="numbers" value="0123456789" class="form-control" /></div>
-              <div class="col-sm-6"><label for="symbols">Symbols</label><input type="text" id="symbols" name="symbols" value="~!@#$%^&*()-_+={}[]|;:&lt;&gt;,./?" class="form-control" /></div>
-            </div>
-          </div>
-          <div id="help">
-            <h2>Notes</h2>
-            <p><strong>Password data will not be stored on a server and is only processed in the browser.</strong></p>
+            <div id="help">
+            <h2 class="p-1">Help</h2>
             <p>Strong passwords should be long and complex. Use the entire keyboard, incorporating numbers, symbols (~!@#$%^&*()-_+={}[]|;:&lt;&gt;,./?), and both lowercase and uppercase letters. The longer, the better. A minimum of eight characters is recommended. Do not use personal information like a dog's name or graduation year. Do not make your password identical to your username or email.</p>
+            </div>
+            <div class="hr"></div>
+            <div  class="form-group row">
+              <div class="col-sm-5"><label for="length" class="form-label col-form-label">Length</label><input type="number" id="length" name="length" value="10" min="5" class="form-control" /></div>
+              <div class="col-sm-5"><label for="amount" class="form-label col-form-label">Amount</label><input type="number" id="amount" name="amount" value="1" min="1" class="form-control" /></div>
+              <div class="col-sm-2 m-auto mt-2"><div class="form-check form-switch"><label for="flexSwitchCheckChecked" class="form-check-label">Save Settings</label><input type="checkbox" id="flexSwitchCheckChecked" name="flexSwitchCheckChecked" value="save" class="form-check-input" checked="checked" /></div></div>
+            </div>
+            <div class="hr"></div>
+            <div  class="form-group row">
+              <div class="col-sm-6"><label for="letters-lower" class="form-label col-form-label">Lowercase Letters</label><input type="text" id="letters-lower" name="letters-lower" value="abcdefghijklmnopqrstuvwxyz" class="form-control" /></div>
+              <div class="col-sm-6"><label for="letters-upper" class="form-label col-form-label">Uppercase Letters</label><input type="text" id="letters-upper" name="letters-upper" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ" class="form-control" /></div>
+            </div>
+            <div  class="form-group row">
+              <div class="col-sm-6"><label for="numbers" class="form-label col-form-label">Numbers</label><input type="text" id="numbers" name="numbers" value="0123456789" class="form-control" /></div>
+              <div class="col-sm-6"><label for="symbols" class="form-label col-form-label">Symbols</label><input type="text" id="symbols" name="symbols" value="~!@#$%^&*()-_+={}[]|;:&lt;&gt;,./?" class="form-control" /></div>
+            </div>
+            <div class="hr"></div>
+            <div><p class="text-center"><strong>Note:</strong> Password data will not be stored on a server and is only processed in the browser.</p></div>
           </div>
         </div>
         <footer><p><span id="description"></span> Copyright &#169; <span id="author"></span></p></footer>

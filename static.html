@@ -4,24 +4,24 @@
     <title>JPassword Generator</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    <meta name="description" content="JPassword Generator (Ver. 5.0.0)" />
+    <meta name="description" content="JPassword Generator (Ver. 5.0.1)" />
     <meta name="keywords" content="password, generator, information, security, randomizer, authentication, infosec" />
     <meta name="author" content="Jonathan Feaster" />
     <!--[if lt IE 11]>
       <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <![endif]-->
-    <!-- Author : Jonathan Feaster, Bit Designer -->
+    <!-- Author : Jonathan Feaster, JonFeaster.com -->
     <style>
-    
+
       html {
         font-size: 100%;
       }
-    
+
       body {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1.2em;
       }
-      
+
       h1 {
         font-size: 1.4em;
         border-bottom-width: 0.0625em;
@@ -29,16 +29,16 @@
         border-bottom-color: rgb(192, 192, 192);
         border-bottom-color: rgba(0, 0, 0, 0.25);
       }
-      
+
       div {
         padding: 0.5em;
       }
-      
+
       header, footer, #app, #help {
         margin: auto;
         width: 60%;
       }
-      
+
       footer {
         font-size: 0.833em;
         text-align: center;
@@ -47,46 +47,46 @@
         border-top-color: rgb(192, 192, 192);
         border-top-color: rgba(0, 0, 0, 0.25);
       }
-      
+
       .i {
         font-style: italic;
       }
-      
+
       #app {
         text-align: center;
       }
-      
+
       label {
         width: 30%;
       }
-      
+
       label:after {
         content: "\003a\00a0";
       }
-      
+
       #length, #letters-lower, #letters-upper, #numbers, #symbols, #amount {
         width: 65%;
       }
-      
+
       #output {
         width: 100%;
         height: 10em;
       }
-      
+
       #button-generate {
         width: 30%;
       }
-      
+
       #button-reset {
         width: 30%;
       }
-      
+
       #button-help {
         width: 30%;
       }
-      
+
       /* Table */
-      
+
       table {
         padding: 1em;
         text-align: left;
@@ -98,31 +98,31 @@
         border-color: rgba(0, 0, 0, 0.25);
         border-collapse: collapse;
       }
-      
+
       table caption, th, td {
         padding: 0.5em;
       }
-      
+
       caption,th {
         font-weight: bold;
       }
-      
+
       th {
         background-color: rgb(192, 192, 192);
         background-color: rgba(0, 0, 0, 0.25);
       }
-      
+
       th, td {
         border-width: 0.0625em;
         border-style: solid;
         border-color: rgb(192, 192, 192);
         border-color: rgba(0, 0, 0, 0.25);
       }
-      
+
       #help {
         display: none;
       }
-      
+
     </style>
   </head>
   <body>
@@ -166,14 +166,14 @@
     */
 
     window.main = window.main || {}; // namespace
-    
+
     main.App = (function() { // class
-      
+
       'use strict';
-      
+
       // init
       function init(params) {
-        
+
         if (typeof params !== 'undefined') {
           document.body.innerHTML = document.getElementById(params.templateId).innerHTML;
           main.Events.click(params.templateButtons.submitId, gen);
@@ -205,23 +205,23 @@
           }
         }
       }
-      
+
       // remove spaces
       function removeSpaces(str) {
-        
+
         let output = '';
-        
+
         if (str) {
           output = str.replace(/\s/g, ''); // remove spaces
         }
         return output;
       }
-      
+
       // validate
       function validate(str, strTest) {
-      
+
         let output = false;
-        
+
         if (strTest !== '') {
           for (let i = 0; i < strTest.length; i++) {
             if (str.indexOf(strTest.charAt(i)) >= 0) {
@@ -235,12 +235,12 @@
         }
         return output;
       }
-      
+
       // random password
       function randomPass(length, characters) {
-      
+
         let output = '';
-        
+
         length = Math.abs(parseInt(length)); // convert length to positive integer
         if (Number.isInteger(length) && characters !== '') {
           for (let i = 0; i < length; i++) {
@@ -249,10 +249,10 @@
         }
         return output;
       }
-      
+
       // reset
       function reset() {
-        
+
         let values = Object.values(params.templateFields);
         for (let value of values) {
           main.Data.destroy(params.databaseId + '-' + value); // destroy templateFields in browser
@@ -263,10 +263,10 @@
         document.getElementById(params.outputId).value = document.getElementById(params.outputId).defaultValue;
         document.getElementById(params.templateButtons.submitId).focus();
       }
-      
+
       // generate random password
       function gen() {
-        
+
         let password = "";
         let output = "";
         let length = document.getElementById(params.templateFields.lengthId).value;
@@ -276,7 +276,7 @@
         let symbols = document.getElementById(params.templateFields.symbolsId).value;
         let amount = document.getElementById(params.templateFields.amountId).value;
         let save = document.getElementById(params.saveId).checked;
-        
+
         if (length >= 5 && (lettersLower !== '' || lettersUpper !== '' || numbers !== '' || symbols !== '') && amount >= 1) {
           lettersLower = removeSpaces(lettersLower); // remove spaces
           lettersUpper = removeSpaces(lettersUpper); // remove spaces
@@ -315,14 +315,14 @@
       };
 
     })();
-    
+
     main.Effects = (function() { // class
-    
+
       // toggle
       function toggle(id) {
-        
+
         const element = document.getElementById(id);
-        
+
         if (element.style.display === 'block') {
           element.style.display = 'none';
         }
@@ -330,20 +330,20 @@
           element.style.display = 'block';
         }
       }
-      
+
       return {
         toggle: toggle
       };
-    
+
     })();
-    
+
     main.Events = (function() { // class
-      
+
       // change
       function change(id, eventObject) {
-        
+
         const element = document.getElementById(id);
-        
+
         if (element.addEventListener) {
           element.addEventListener('change', eventObject);
         }
@@ -351,12 +351,12 @@
           element.attachEvent('onchange', eventObject);
         }
       }
-      
+
       // click
       function click(id, eventObject) {
-        
+
         const element = document.getElementById(id);
-        
+
         if (element.addEventListener) {
           element.addEventListener('click', eventObject);
         }
@@ -364,16 +364,16 @@
           element.attachEvent('onclick', eventObject);
         }
       }
-      
+
       return {
         change: change,
         click: click
       };
-    
+
     })();
-    
+
     main.Data = (function() { // class
-    
+
       // test
       function test() {
         if (typeof(Storage) !== 'undefined') {
@@ -389,7 +389,7 @@
           return false;
         }
       }
-      
+
       // store
       function store(key, value, expiry) {
         if (test() === true) {
@@ -401,7 +401,7 @@
           }
         }
       }
-      
+
       // read
       function read(key) {
         if (test() === true) {
@@ -413,7 +413,7 @@
           }
         }
       }
-      
+
       // destroy
       function destroy(key) {
         if (test() === true) {
@@ -425,14 +425,14 @@
           }
         }
       }
-      
+
       return {
         test: test,
         store: store,
         read: read,
         destroy: destroy
       };
-    
+
     })();
 
     // -->

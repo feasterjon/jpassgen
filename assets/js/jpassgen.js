@@ -1,19 +1,20 @@
 <!--
 
 /*
-Main
-Updated: 2021-09-06
+Title: JPassGen
+Author: Jonathan Feaster, JonFeaster.com
+Date: 2021-09-06
 */
 
 window.main = window.main || {}; // namespace
-    
+
 main.App = (function() { // class
-      
+
   'use strict';
-      
+
   // init
   function init(data) {
-        
+
     if (typeof data !== 'undefined') {
       document.body.innerHTML = document.getElementById(data.templateId).innerHTML;
       main.Events.click(data.templateButtons.submitId, gen);
@@ -48,23 +49,23 @@ main.App = (function() { // class
       }
     }
   }
-      
+
   // remove spaces
   function removeSpaces(str) {
-        
+
     let output = '';
-        
+
     if (str) {
      output = str.replace(/\s/g, ''); // remove spaces
     }
     return output;
   }
-      
+
   // validate
   function validate(str, strTest) {
-        
+
     let output = false;
-            
+
     if (strTest !== '') {
       for (let i = 0; i < strTest.length; i++) {
         if (str.indexOf(strTest.charAt(i)) >= 0) {
@@ -78,12 +79,12 @@ main.App = (function() { // class
     }
     return output;
   }
-      
+
   // random password
   function randomPass(length, characters) {
-        
+
     let output = '';
-            
+
     length = Math.abs(parseInt(length)); // convert length to positive integer
     if (Number.isInteger(length) && characters !== '') {
       for (let i = 0; i < length; i++) {
@@ -92,10 +93,10 @@ main.App = (function() { // class
     }
     return output;
   }
-      
+
   // reset
   function reset() {
-          
+
     let values = Object.values(data.templateFields);
     for (let value of values) {
       main.Data.destroy(data.localDB + '-' + value); // destroy templateFields in browser
@@ -106,10 +107,10 @@ main.App = (function() { // class
     document.getElementById(data.outputId).value = document.getElementById(data.outputId).defaultValue;
     document.getElementById(data.templateButtons.submitId).focus();
   }
-      
+
   // generate random password
   function gen() {
-            
+
     let password = "";
     let output = "";
     let length = document.getElementById(data.templateFields.lengthId).value;
@@ -119,7 +120,7 @@ main.App = (function() { // class
     let symbols = document.getElementById(data.templateFields.symbolsId).value;
     let amount = document.getElementById(data.templateFields.amountId).value;
     let save = document.getElementById(data.saveId).checked;
-            
+
     if (length >= 5 && (lettersLower !== '' || lettersUpper !== '' || numbers !== '' || symbols !== '') && amount >= 1) {
       lettersLower = removeSpaces(lettersLower); // remove spaces
       lettersUpper = removeSpaces(lettersUpper); // remove spaces
@@ -160,12 +161,12 @@ main.App = (function() { // class
 })();
 
 main.Effects = (function() { // class
-    
+
   // toggle
   function toggle(id) {
-          
+
     const element = document.getElementById(id);
-            
+
     if (element.style.display === 'block') {
       element.style.display = 'none';
     }
@@ -173,20 +174,20 @@ main.Effects = (function() { // class
       element.style.display = 'block';
     }
   }
-        
+
   return {
     toggle: toggle
   };
-    
+
 })();
-    
+
 main.Events = (function() { // class
-        
+
   // click
   function click(id, eventObject) {
-            
+
     const element = document.getElementById(id);
-              
+
     if (element.addEventListener) {
       element.addEventListener('click', eventObject);
     }
@@ -194,20 +195,20 @@ main.Events = (function() { // class
       element.attachEvent('onclick', eventObject);
     }
   }
-          
+
   return {
     click: click
   };
-      
+
 })();
 
 main.Tasks = (function() { // class
-        
+
   // copy to clipbord
   function copyClip(id, copyId) {
-            
+
     const element = document.getElementById(id);
-              
+
     element.select();
     element.setSelectionRange(0, 99999); /* For mobile devices */
     navigator.clipboard.writeText(element.value);
@@ -223,15 +224,15 @@ main.Tasks = (function() { // class
       }, 1000);
     }
   }
-          
+
   return {
     copyClip: copyClip
   };
-      
+
 })();
 
 main.Data = (function() { // class
-    
+
   // test
   function test() {
     if (typeof(Storage) !== 'undefined') {
@@ -247,7 +248,7 @@ main.Data = (function() { // class
       return false;
     }
   }
-      
+
   // store
   function store(key, value, expiry) {
     if (test() === true) {
@@ -259,7 +260,7 @@ main.Data = (function() { // class
       }
     }
   }
-      
+
   // read
   function read(key) {
     if (test() === true) {
@@ -271,7 +272,7 @@ main.Data = (function() { // class
       }
     }
   }
-      
+
   // destroy
   function destroy(key) {
     if (test() === true) {
@@ -283,14 +284,14 @@ main.Data = (function() { // class
       }
     }
   }
-      
+
   return {
     test: test,
     store: store,
     read: read,
     destroy: destroy
   };
-    
+
 })();
 
 // -->

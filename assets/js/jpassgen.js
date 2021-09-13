@@ -3,7 +3,7 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-09-06
+Date: 2021-09-13
 */
 
 window.main = window.main || {}; // namespace
@@ -22,9 +22,12 @@ main.App = (function() { // class
         main.Tasks.copyClip(data.outputId, data.templateButtons.copyId);
       });
       main.Events.click(data.templateButtons.resetId, reset);
-      main.Events.click(data.templateButtons.helpId, function() {
-        main.Effects.toggle(data.helpContentId);
-      });
+      if (data.enableHelp === true) {
+        document.getElementById(data.helpContentId).style.display = 'none';
+        main.Events.click(data.templateButtons.helpId, function() {
+          main.Effects.toggle(data.helpContentId);
+        });
+      }
       if (typeof main.Data.read(data.localDB + '-' + data.saveId) !== 'undefined') {
         let query;
         let values = Object.values(data.templateFields);
@@ -163,15 +166,16 @@ main.App = (function() { // class
 main.Effects = (function() { // class
 
   // toggle
+
   function toggle(id) {
 
     const element = document.getElementById(id);
 
-    if (element.style.display === 'block') {
-      element.style.display = 'none';
+    if (element.style.display === 'none') {
+      element.style.display = '';
     }
     else {
-      element.style.display = 'block';
+      element.style.display = 'none';
     }
   }
 

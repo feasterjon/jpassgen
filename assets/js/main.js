@@ -1,6 +1,7 @@
 const data = {
   "autoStart": true,
   "enableCreds": true,
+  "enableHelp": true,
   "localDB": "jPasswordGen",
   "templateId": "template",
   "saveId": "flexSwitchCheckChecked",

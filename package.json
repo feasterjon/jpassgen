@@ -1,0 +1,25 @@
+{
+  "name": "jpassgen",
+  "version": "7.0.0",
+  "description": "A simple password generator utilizing vanilla JavaScript.",
+  "homepage": "https://gitlab.com/jonfeaster/jpassgen",
+  "author": "Jonathan Feaster (https://jonfeaster.com)",
+  "private": "true",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/jonfeaster/jpassgen.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/jonfeaster/jpassgen/issues"
+  },
+  "devDependencies": {
+    "webpack": "^5.59.1",
+    "webpack-cli": "^4.9.1"
+  }
+}

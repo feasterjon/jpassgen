@@ -7,5 +7,8 @@ module.exports = {
     path: path.resolve(__dirname, 'public/assets/js'),
     filename: 'jpassgen.min.js',
     clean: true,
+  },
+  experiments: {
+    topLevelAwait: true
   }
 };

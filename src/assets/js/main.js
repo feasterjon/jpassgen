@@ -1,10 +1,10 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-10-21
+Date: 2021-10-25
 */
 
-import { App } from './app.js';
+import config from './config.js';
 import { Effects } from './effects.js';
 import { Events } from './events.js';
 import { Interaction } from './interaction.js';
@@ -12,8 +12,8 @@ import { JPassGen } from './jpassgen.js';
 import { LocalData } from './localdata.js';
 
 class Main {
-  constructor(app) {
-    this.data = app.data;
+  constructor() {
+    this.data = config;
     this.effects = new Effects();
     this.events = new Events();
     this.interaction = new Interaction();
@@ -141,6 +141,5 @@ class Main {
   }
 }
 
-const app = new App();
-const main = new Main(app);
+const main = new Main();
 main.mount();

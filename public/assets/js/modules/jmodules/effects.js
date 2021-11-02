@@ -1,7 +1,7 @@
 /*
 Title: Effects
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-10-20
+Date: 2021-10-28
 */
 
 class Effects {

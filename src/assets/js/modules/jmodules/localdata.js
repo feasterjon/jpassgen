@@ -80,7 +80,7 @@ class LocalData {
   // read
   
   read(key) {
-    let output = "";
+    let output;
     if (this.lsSupport === true) {
       if (localStorage.getItem(key) !== null) {
         output = localStorage.getItem(key);
@@ -107,7 +107,6 @@ class LocalData {
       return data;
     }
   }
-
 
   // destroy
 

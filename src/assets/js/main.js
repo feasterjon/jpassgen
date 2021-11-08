@@ -1,16 +1,16 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-02
+Date: 2021-11-08
 */
 
-import config from './config.js';
+import CONFIG from './config.js';
 import * as jmodules from './modules/jmodules/index.js';
 import { JPassGen } from './modules/jpassgen/index.js';
 
 class Main {
   constructor() {
-    this.data = config;
+    this.data = CONFIG;
     this.effects = new jmodules.Effects();
     this.events = new jmodules.Events();
     this.interaction = new jmodules.Interaction();

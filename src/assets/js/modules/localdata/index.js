@@ -1,7 +1,7 @@
 /*
 Title: LocalData
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-02
+Date: 2021-11-16
 */
 
 class LocalData {
@@ -28,11 +28,11 @@ class LocalData {
     if (typeof this.reset !== 'undefined') {
       if (this.reset === true) {
         this.destroy();
-        this.destroyCookies();
+        this.destroyCookie();
       }
     }
   }
-
+  
   // store
 
   store(key, value, expiry) {
@@ -122,12 +122,7 @@ class LocalData {
       }
     }
     else {
-      if (typeof key !== 'undefined') {
-        this.storeCookie(key, "", -1); // destroy cookie
-      }
-      else {
-        this.destroyCookies();
-      }
+      this.destroyCookie(key);
     }
   }
   
@@ -187,16 +182,21 @@ class LocalData {
     return output;
   }
   
-  // destroy all cookies
+  // destroy all cookie
   
-  destroyCookies() {
-    let cookies = document.cookie.split(";");
-    let cookiesLength = cookies.length;
-    for (let i = 0; i < cookiesLength; i++) {
-      let cookie = cookies[i];
-      let eqPos = cookie.indexOf("=");
-      let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  destroyCookie(key) {
+    if (typeof key !== 'undefined') {
+      this.storeCookie(key, "", -1); // destroy cookie
+    }
+    else {
+      let cookies = document.cookie.split(";");
+      let cookiesLength = cookies.length;
+      for (let i = 0; i < cookiesLength; i++) {
+        let cookie = cookies[i];
+        let eqPos = cookie.indexOf("=");
+        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
     }
   }
   

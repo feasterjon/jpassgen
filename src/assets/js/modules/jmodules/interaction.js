@@ -1,30 +1,65 @@
 /*
 Title: Interaction
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-10-28
+Date: 2021-11-17
 */
 
 class Interaction {
 
   // copy to clipbord
 
-  copyClip(id, copyId) {
+  copyClip(element, copyElement, text, milliseconds) {
+    
+    const el = document.querySelectorAll(
+      element + ', #' + element + ', .' + element
+    )[0];
 
-    const element = document.getElementById(id);
+    el.select();
+    el.setSelectionRange(0, 99999); /* For mobile devices */
+    navigator.clipboard.writeText(el.value);
+    this.feedback(copyElement, text, milliseconds);
+  }
+  
+  // feedback
 
-    element.select();
-    element.setSelectionRange(0, 99999); /* For mobile devices */
-    navigator.clipboard.writeText(element.value);
-    if (typeof(copyId) !== 'undefined') {
-      const copyElement = document.getElementById(copyId);
-      const defaultInnerHTML = copyElement.innerHTML;
-      copyElement.disabled = true;
-      copyElement.innerHTML = "Copied!";
-      copyElement.focus();
+  feedback(element, text, milliseconds) {
+  
+    const el = document.querySelectorAll(
+      element + ', #' + element + ', .' + element
+    )[0];
+    let ms = 1000;
+    let hasInnerHTML = false;
+    
+    if (typeof el !== 'undefined') {
+      let defaultTxt = el.innerHTML;
+      if (defaultTxt !== '') {
+        hasInnerHTML = true;
+      }
+      if (hasInnerHTML === false) {
+        defaultTxt = el.value;
+      }
+      el.disabled = true;
+      if (typeof text !== 'undefined') {
+        if (hasInnerHTML === true) {
+          el.innerHTML = text;
+        }
+        else {
+          el.value = text;
+        }
+      }
+      el.focus();
+      if (typeof milliseconds !== 'undefined') {
+        ms = milliseconds;
+      }
       setTimeout(function(){
-        copyElement.innerHTML = defaultInnerHTML;
-        copyElement.disabled = false;
-      }, 1000);
+        if (hasInnerHTML === true) {  
+          el.innerHTML = defaultTxt;
+        }
+        else {
+          el.value = defaultTxt;
+        }
+        el.disabled = false;
+      }, ms);
     }
   }
 }

@@ -1,10 +1,11 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-08
+Date: 2021-11-17
 */
 
 import CONFIG from './config.js';
+import { LocalData } from './modules/localdata/index.js';
 import * as jmodules from './modules/jmodules/index.js';
 import { JPassGen } from './modules/jpassgen/index.js';
 
@@ -15,7 +16,7 @@ class Main {
     this.events = new jmodules.Events();
     this.interaction = new jmodules.Interaction();
     this.jPassGen = new JPassGen();
-    this.localData = new jmodules.LocalData(this.data.localData);
+    this.localData = new LocalData(this.data.localData);
   }
   
   // mount interface
@@ -27,7 +28,7 @@ class Main {
         this.gen();
       });
       this.events.click(this.data.templateButtons.copyId, () => {
-        this.interaction.copyClip(this.data.outputId, this.data.templateButtons.copyId);
+        this.interaction.copyClip(this.data.outputId, this.data.templateButtons.copyId, 'Copied');
       });
       this.events.click(this.data.templateButtons.resetId, () => {
         this.reset();

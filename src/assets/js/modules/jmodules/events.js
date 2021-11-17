@@ -8,29 +8,33 @@ class Events {
 
   // change
 
-  change(el, eventObject) {
+  change(element, eventObject) {
+    
+    const el = document.querySelectorAll(
+      element + ', #' + element + ', .' + element
+    )[0];
 
-    const element = document.getElementById(el);
-
-    if (element.addEventListener) {
-      element.addEventListener('change', eventObject);
+    if (el.addEventListener) {
+      el.addEventListener('change', eventObject);
     }
-    else if (element.attachEvent) {
-      element.attachEvent('onchange', eventObject);
+    else if (el.attachEvent) {
+      el.attachEvent('onchange', eventObject);
     }
   }
 
   // click
 
-  click(el, eventObject) {
+  click(element, eventObject) {
+    
+    const el = document.querySelectorAll(
+      element + ', #' + element + ', .' + element
+    )[0];
 
-    const element = document.getElementById(el);
-
-    if (element.addEventListener) {
-      element.addEventListener('click', eventObject);
+    if (el.addEventListener) {
+      el.addEventListener('click', eventObject);
     }
-    else if (element.attachEvent) {
-      element.attachEvent('onclick', eventObject);
+    else if (el.attachEvent) {
+      el.attachEvent('onclick', eventObject);
     }
   }
 }

@@ -5,9 +5,9 @@ Date: 2021-11-17
 */
 
 import CONFIG from './config.js';
-import { LocalData } from './modules/localdata/index.js';
 import * as jmodules from './modules/jmodules/index.js';
 import { JPassGen } from './modules/jpassgen/index.js';
+import { LocalData } from './modules/localdata/index.js';
 
 class Main {
   constructor() {

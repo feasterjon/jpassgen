@@ -1,6 +1,6 @@
 {
   "name": "jpassgen",
-  "version": "7.3.3",
+  "version": "7.4.0",
   "description": "A simple password generator utilizing vanilla JavaScript.",
   "homepage": "https://gitlab.com/jonfeaster/jpassgen",
   "author": "Jonathan Feaster (https://jonfeaster.com)",

@@ -1,7 +1,7 @@
 /*
 Title: LocalData Admin
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-16
+Date: 2021-12-02
 */
 
 import { LocalData } from './index.js';
@@ -15,11 +15,11 @@ class LocalDataAdmin extends LocalData {
   // update view
   
   updateView() {
-    if (typeof this.viewId !== 'undefined') {
+    if (this.viewId) {
       let el = document.getElementById(this.viewId);
       if (el !== 'undefined') {
         let output = this.read(this.database);
-        if (typeof output === 'undefined') {
+        if (!output) {
           output = '';
           el.placeholder = 'No Data';
         }
@@ -31,19 +31,17 @@ class LocalDataAdmin extends LocalData {
   // save view
   
   saveView(validate) {
-    if (typeof this.viewId !== 'undefined') {
+    if (this.viewId) {
       let valid = true;
       let el = document.getElementById(this.viewId);
       if (el !== 'undefined') {
         let data = el.value.toString();
-        if (typeof validate !== 'undefined') {
-          if (validate === true) {
-            if (this.validateJSON(data) === false) {
-              valid = false;
-            }
+        if (validate) {
+          if (!this.validateJSON(data)) {
+            valid = false;
           }
         }
-        else if (this.validateJSON(data) === false) {
+        else if (!this.validateJSON(data)) {
           valid = false;
         }
         if (valid === true) {

@@ -1,7 +1,7 @@
 /*
 Title: LocalData
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-16
+Date: 2021-12-02
 */
 
 class LocalData {
@@ -14,35 +14,29 @@ class LocalData {
     this.persistentExpiry = 36500;
     
     this.lsSupport = false;
-    if (typeof(Storage) !== 'undefined') {
+    if (typeof (Storage) !== 'undefined') {
       try {
         sessionStorage.setItem('sessionStorage', 'true');
         this.lsSupport = true;
       } catch(err) {}
     }
-    if (typeof this.cookieStorage !== 'undefined') {
-      if (this.cookieStorage === true) {
-        this.lsSupport = false;
-      }
+    if (this.cookieStorage) {
+      this.lsSupport = false;
     }
-    if (typeof this.reset !== 'undefined') {
-      if (this.reset === true) {
-        this.destroy();
-        this.destroyCookie();
-      }
+    if (this.reset) {
+      this.destroy();
+      this.destroyCookie();
     }
   }
   
   // store
 
   store(key, value, expiry) {
-    if (typeof this.persistence !== 'undefined') {
-      if (this.persistence === true) {
-        expiry = this.persistentExpiry;
-      }
+    if (this.persistence) {
+      expiry = this.persistentExpiry;
     }
-    if (this.lsSupport === true) {
-      if (typeof expiry !== 'undefined') {
+    if (this.lsSupport) {
+      if (expiry) {
         if (expiry > 0) {
           localStorage.setItem(key, value);
         }
@@ -55,7 +49,7 @@ class LocalData {
       }
     }
     else {
-      if (typeof expiry !== 'undefined') {
+      if (expiry) {
         this.storeCookie(key, value, expiry);
       }
       else {
@@ -69,7 +63,7 @@ class LocalData {
   storeField(key, value, expiry) {
     let data = this.read(this.database);
     let output = {};
-    if (this.validateJSON(data) === true) {
+    if (this.validateJSON(data)) {
       output = JSON.parse(data);
     }
     output[key] = value;
@@ -81,15 +75,15 @@ class LocalData {
   
   read(key) {
     let output;
-    if (this.lsSupport === true) {
-      if (localStorage.getItem(key) !== null) {
+    if (this.lsSupport) {
+      if (localStorage.getItem(key)) {
         output = localStorage.getItem(key);
       }
-      else if (sessionStorage.getItem(key) !== null) {
+      else if (sessionStorage.getItem(key)) {
         output = sessionStorage.getItem(key);
       }
     }
-    else if (this.readCookie(key) !== null) {
+    else if (this.readCookie(key)) {
       output = this.readCookie(key);
     }
     return output;
@@ -99,7 +93,7 @@ class LocalData {
 
   readField(key) {
     let data = this.read(this.database);
-    if (this.validateJSON(data) === true) {
+    if (this.validateJSON(data)) {
       data = JSON.parse(data);
       return data[key];
     }
@@ -111,8 +105,8 @@ class LocalData {
   // destroy
 
   destroy(key) {
-    if (this.lsSupport === true) {
-      if (typeof key !== 'undefined') {
+    if (this.lsSupport) {
+      if (key) {
         localStorage.removeItem(key);
         sessionStorage.removeItem(key);
       }
@@ -129,17 +123,17 @@ class LocalData {
   // destroy field
 
   destroyField(key) {
-    if (typeof key !== 'undefined') {
+    if (key) {
       let data = this.read(this.database);
       let output;
-      if (this.validateJSON(data) === true) {
+      if (this.validateJSON(data)) {
         output = JSON.parse(data);
         delete output[key];
         output = JSON.stringify(output);
-        if (sessionStorage.getItem(this.database) !== null) {
+        if (sessionStorage.getItem(this.database)) {
           this.store(this.database, output);
         }
-        else if (localStorage.getItem(this.database) !== null) {
+        else if (localStorage.getItem(this.database)) {
           this.store(this.database, output, this.persistentExpiry);
         }
         else {
@@ -185,7 +179,7 @@ class LocalData {
   // destroy all cookie
   
   destroyCookie(key) {
-    if (typeof key !== 'undefined') {
+    if (key) {
       this.storeCookie(key, "", -1); // destroy cookie
     }
     else {
@@ -204,13 +198,11 @@ class LocalData {
   
   validateJSON(data) {
     let output = false;
-    if (typeof data !== 'undefined') {
-      if (data !== null) {
-        try {
-          JSON.parse(data);
-          output = true;
-        } catch(err) {}
-      }
+    if (data) {
+      try {
+        JSON.parse(data);
+        output = true;
+      } catch(err) {}
     }
     return output;
   }

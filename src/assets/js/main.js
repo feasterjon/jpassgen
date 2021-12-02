@@ -1,7 +1,7 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-17
+Date: 2021-12-02
 */
 
 import CONFIG from './config.js';
@@ -22,7 +22,7 @@ class Main {
   // mount interface
   
   mount() {
-    if (typeof this.data !== 'undefined') {
+    if (this.data) {
       document.body.innerHTML = document.getElementById(this.data.templateId).innerHTML;
       this.events.click(this.data.templateButtons.submitId, () => {
         this.gen();
@@ -39,18 +39,16 @@ class Main {
           this.effects.toggle(this.data.helpContentId);
         });
       }
-      if (typeof this.localData.readField(this.data.saveId) !== 'undefined') {
-        if (this.localData.readField(this.data.saveId) === true) {
-          let query;
-          let values = Object.values(this.data.templateFields);
-          for (let value of values) {
-            query = this.localData.readField(value);
-            if (typeof query !== 'undefined') {
-              document.getElementById(value).value = query;
-            }
+      if (this.localData.readField(this.data.saveId)) {
+        let query;
+        let values = Object.values(this.data.templateFields);
+        for (let value of values) {
+          query = this.localData.readField(value);
+          if (query !== 'undefined') {
+            document.getElementById(value).value = query;
           }
-          document.getElementById(this.data.saveId).checked = true;
         }
+        document.getElementById(this.data.saveId).checked = true;
       }
       if (this.data.autoStart === true) {
         this.gen(); // generate random password

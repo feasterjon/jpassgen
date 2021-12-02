@@ -1,7 +1,7 @@
 /*
 Title: Interaction
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-17
+Date: 2021-12-02
 */
 
 class Interaction {
@@ -30,7 +30,7 @@ class Interaction {
     let ms = 1000;
     let hasInnerHTML = false;
     
-    if (typeof el !== 'undefined') {
+    if (el) {
       let defaultTxt = el.innerHTML;
       if (defaultTxt !== '') {
         hasInnerHTML = true;
@@ -39,7 +39,7 @@ class Interaction {
         defaultTxt = el.value;
       }
       el.disabled = true;
-      if (typeof text !== 'undefined') {
+      if (text) {
         if (hasInnerHTML === true) {
           el.innerHTML = text;
         }
@@ -48,7 +48,7 @@ class Interaction {
         }
       }
       el.focus();
-      if (typeof milliseconds !== 'undefined') {
+      if (milliseconds) {
         ms = milliseconds;
       }
       setTimeout(function(){

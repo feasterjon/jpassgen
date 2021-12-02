@@ -1,7 +1,7 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-10-29
+Date: 2021-12-02
 */
 
 class JPassGen {
@@ -12,7 +12,7 @@ class JPassGen {
 
     let output = false;
 
-    if (strTest !== '') {
+    if (strTest) {
       let strTestLength = strTest.length;
       for (let i = 0; i < strTestLength; i++) {
         if (str.indexOf(strTest.charAt(i)) >= 0) {
@@ -34,7 +34,7 @@ class JPassGen {
     let output = '';
 
     length = Math.abs(parseInt(length)); // convert length to positive integer
-    if (Number.isInteger(length) && characters !== '') {
+    if (Number.isInteger(length) && characters) {
       for (let i = 0; i < length; i++) {
         output += characters.charAt(Math.floor(Math.random() * characters.length));
       }

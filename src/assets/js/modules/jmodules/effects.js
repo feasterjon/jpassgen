@@ -1,10 +1,10 @@
 /*
 Title: Effects
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-17
+Date: 2022-03-30
 */
 
-class Effects {
+export class Effects {
   
   // toggle
 
@@ -14,13 +14,8 @@ class Effects {
       element + ', #' + element + ', .' + element
     )[0];
     
-    if (el.style.display === 'none') {
-      el.style.display = '';
-    }
-    else {
-      el.style.display = 'none';
-    }
+    el.style.display === 'none' ?
+    el.style.display = ''
+    : el.style.display = 'none';
   }
 }
-
-export { Effects };

@@ -1,10 +1,10 @@
 /*
 Title: Events
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-12-09
+Date: 2022-03-30
 */
 
-class Events {
+export class Events {
   
   // blur
 
@@ -54,5 +54,3 @@ class Events {
     }
   }
 }
-
-export { Events };

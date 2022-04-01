@@ -1,15 +1,15 @@
 /*
 Title: Template Engine
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-10-28
+Date: 2022-04-01
 */
 
-class Template {
-  constructor(data, input) {
+export class Template {
+  constructor(data, input, tagPrefix = "{{", tagSuffix = "}}") {
     this.data = data;
     this.input = input;
-    this.tagPrefix = "{{ ";
-    this.tagSuffix = " }}";
+    this.tagPrefix = tagPrefix;
+    this.tagSuffix = tagSuffix;
   }
 
   // compile
@@ -22,5 +22,3 @@ class Template {
     return this.input;
   }
 }
-
-export { Template };

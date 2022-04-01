@@ -1,10 +1,10 @@
 /*
 Title: Interaction
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-12-02
+Date: 2022-03-30
 */
 
-class Interaction {
+export class Interaction {
 
   // copy to clipbord
 
@@ -22,46 +22,31 @@ class Interaction {
   
   // feedback
 
-  feedback(element, text, milliseconds) {
+  feedback(element, text, milliseconds = 1000) {
   
     const el = document.querySelectorAll(
       element + ', #' + element + ', .' + element
     )[0];
-    let ms = 1000;
-    let hasInnerHTML = false;
     
     if (el) {
-      let defaultTxt = el.innerHTML;
-      if (defaultTxt !== '') {
-        hasInnerHTML = true;
-      }
-      if (hasInnerHTML === false) {
+      let defaultTxt = el.textContent;
+      let hasInnerText = defaultTxt ? true : false;
+      if (!hasInnerText) {
         defaultTxt = el.value;
       }
       el.disabled = true;
       if (text) {
-        if (hasInnerHTML === true) {
-          el.innerHTML = text;
-        }
-        else {
-          el.value = text;
-        }
+        hasInnerText === true ?
+        el.textContent = text
+        : el.value = text;
       }
       el.focus();
-      if (milliseconds) {
-        ms = milliseconds;
-      }
-      setTimeout(function(){
-        if (hasInnerHTML === true) {  
-          el.innerHTML = defaultTxt;
-        }
-        else {
-          el.value = defaultTxt;
-        }
+      setTimeout(() => {
+        hasInnerText === true ?  
+        el.textContent = defaultTxt
+        : el.value = defaultTxt;
         el.disabled = false;
-      }, ms);
+      }, milliseconds);
     }
   }
 }
-
-export { Interaction };

@@ -1,7 +1,7 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2022-04-01
+Date: 2022-04-06
 */
 
 import CONFIG from './config.js';
@@ -10,13 +10,15 @@ import { JPassGen } from './modules/jpassgen/index.js';
 import { LocalData } from './modules/localdata/index.js';
 
 class Main {
-  constructor() {
-    this.data = CONFIG.data[0].attributes;
+  constructor(data) {
+    this.data = data;
     this.effects = new jmodules.Effects();
     this.events = new jmodules.Events();
     this.interaction = new jmodules.Interaction();
     this.jPassGen = new JPassGen();
     this.localData = new LocalData(this.data.localData);
+  }
+  render() {
     if (this.data) {
       document.body.innerHTML = document.getElementById(this.data.templateId).innerHTML;
       this.events.click(this.data.templateButtons.submitId, () => {
@@ -58,8 +60,6 @@ class Main {
       }
     }
   }
-  
-  // remove spaces
   removeSpaces(str) {
 
     let output = '';
@@ -69,8 +69,6 @@ class Main {
     }
     return output;
   }
-  
-  // reset
   reset() {
 
     let values = Object.values(this.data.templateFields);
@@ -83,8 +81,6 @@ class Main {
     document.getElementById(this.data.outputId).value = document.getElementById(this.data.outputId).defaultValue;
     document.getElementById(this.data.templateButtons.submitId).focus();
   }
-  
-  // generate random password
   gen() {
 
     let password = "";
@@ -131,4 +127,5 @@ class Main {
   }
 }
 
-const main = new Main();
+const main = new Main(CONFIG.data[0].attributes);
+main.render();

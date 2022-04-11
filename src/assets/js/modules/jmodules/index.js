@@ -1,7 +1,7 @@
 /*
 Title: JModules
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-11-17
+Date: 2022-04-08
 */
 
 export { Effects } from './effects.js';

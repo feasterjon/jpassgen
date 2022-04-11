@@ -1,17 +1,16 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2022-04-06
+Date: 2022-04-11
 */
 
-import CONFIG from './config.js';
 import * as jmodules from './modules/jmodules/index.js';
 import { JPassGen } from './modules/jpassgen/index.js';
 import { LocalData } from './modules/localdata/index.js';
 
 class Main {
   constructor(data) {
-    this.data = data;
+    this.data = data.data[0].attributes;
     this.effects = new jmodules.Effects();
     this.events = new jmodules.Events();
     this.interaction = new jmodules.Interaction();
@@ -127,5 +126,16 @@ class Main {
   }
 }
 
-const main = new Main(CONFIG.data[0].attributes);
-main.render();
+export class App {
+  async load() {
+    let response = await fetch('assets/api/config.json');
+    if (response.status === 200) {
+      let data = await response.json();
+      const main = new Main(data);
+      main.render();
+    }
+  }
+}
+
+const app = new App();
+app.load();

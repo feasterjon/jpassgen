@@ -1,7 +1,7 @@
 /*
 Title: Template Engine
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2022-04-01
+Date: 2022-04-08
 */
 
 export class Template {
@@ -11,9 +11,6 @@ export class Template {
     this.tagPrefix = tagPrefix;
     this.tagSuffix = tagSuffix;
   }
-
-  // compile
-
   compile() {
     let values = Object.values(this.data);
     for (let value of values) {

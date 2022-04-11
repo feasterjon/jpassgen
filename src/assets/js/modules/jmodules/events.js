@@ -1,19 +1,14 @@
 /*
 Title: Events
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2022-03-30
+Date: 2022-04-08
 */
 
 export class Events {
-  
-  // blur
-
   blur(element, eventObject) {
-    
     const el = document.querySelectorAll(
       element + ', #' + element + ', .' + element
     )[0];
-
     if (el.addEventListener) {
       el.addEventListener('blur', eventObject);
     }
@@ -21,15 +16,10 @@ export class Events {
       el.attachEvent('onblur', eventObject);
     }
   }
-
-  // change
-
   change(element, eventObject) {
-    
     const el = document.querySelectorAll(
       element + ', #' + element + ', .' + element
     )[0];
-
     if (el.addEventListener) {
       el.addEventListener('change', eventObject);
     }
@@ -37,15 +27,10 @@ export class Events {
       el.attachEvent('onchange', eventObject);
     }
   }
-
-  // click
-
   click(element, eventObject) {
-    
     const el = document.querySelectorAll(
       element + ', #' + element + ', .' + element
     )[0];
-
     if (el.addEventListener) {
       el.addEventListener('click', eventObject);
     }

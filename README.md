@@ -2,4 +2,4 @@
 
 This is a simple password generator utilizing vanilla JavaScript.
 
-View the live version at [https://www.jonfeaster.com/app/#/2](https://www.jonfeaster.com/app/#/jpassgen)
+View the live version at [https://www.jonfeaster.com/app/#/jpassgen](https://www.jonfeaster.com/app/#/jpassgen)

@@ -1,38 +1,20 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-12-02
+Date: 2022-04-28
 */
 
-class JPassGen {
-
-  // validate
-  
+export class JPassGen {
   validate(str, strTest) {
-
-    let output = false;
-
     if (strTest) {
-      let strTestLength = strTest.length;
-      for (let i = 0; i < strTestLength; i++) {
-        if (str.indexOf(strTest.charAt(i)) >= 0) {
-          output = true;
-          break;
-        }
+      for (let i = 0; i < strTest.length; i++) {
+        return (str.indexOf(strTest.charAt(i)) >= 0) ? true : false;
       }
     }
-    else {
-      output = true;
-    }
-    return output;
+    else { return true }
   }
-
-  // generate random password
-  
   generate(length, characters) {
-
     let output = '';
-
     length = Math.abs(parseInt(length)); // convert length to positive integer
     if (Number.isInteger(length) && characters) {
       for (let i = 0; i < length; i++) {
@@ -42,5 +24,3 @@ class JPassGen {
     return output;
   }
 }
-
-export { JPassGen };

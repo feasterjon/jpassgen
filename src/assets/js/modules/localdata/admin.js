@@ -1,23 +1,20 @@
 /*
 Title: LocalData Admin
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2021-12-02
+Date: 2022-04-27
 */
 
 import { LocalData } from './index.js';
 
-class LocalDataAdmin extends LocalData {
+export class LocalDataAdmin extends LocalData {
   constructor(data) {
     super(data);
     this.viewId = this.data.viewId;
   }
-  
-  // update view
-  
   updateView() {
     if (this.viewId) {
       let el = document.getElementById(this.viewId);
-      if (el !== 'undefined') {
+      if (el) {
         let output = this.read(this.database);
         if (!output) {
           output = '';
@@ -27,24 +24,19 @@ class LocalDataAdmin extends LocalData {
       }
     }
   }
-  
-  // save view
-  
-  saveView(validate) {
+  saveView(validate = true) {
     if (this.viewId) {
-      let valid = true;
       let el = document.getElementById(this.viewId);
-      if (el !== 'undefined') {
+      if (el) {
+        let valid = true;
         let data = el.value.toString();
-        if (validate) {
-          if (!this.validateJSON(data)) {
-            valid = false;
-          }
-        }
-        else if (!this.validateJSON(data)) {
+        if (validate && !this.schema.validateJSON(data)) {
           valid = false;
         }
-        if (valid === true) {
+        if (this.JSONAPI && !this.schema.validateJSONAPI(data)) {
+          valid = false;
+        }
+        if (valid) {
           this.store(this.database, data, this.persistentExpiry);
         }
         else {
@@ -58,5 +50,3 @@ class LocalDataAdmin extends LocalData {
     }
   }
 }
-
-export { LocalDataAdmin };

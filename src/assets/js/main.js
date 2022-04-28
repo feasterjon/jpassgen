@@ -1,7 +1,7 @@
 /*
 Title: JPassGen
 Author: Jonathan Feaster, JonFeaster.com
-Date: 2022-04-11
+Date: 2022-04-28
 */
 
 import * as jmodules from './modules/jmodules/index.js';
@@ -60,16 +60,9 @@ export class Main {
     }
   }
   removeSpaces(str) {
-
-    let output = '';
-
-    if (str) {
-     output = str.replace(/\s/g, ''); // remove spaces
-    }
-    return output;
+    return str ? str.replace(/\s/g, '') : '';
   }
   reset() {
-
     let values = Object.values(this.data.templateFields);
     for (let value of values) {
       this.localData.destroyField(value); // destroy templateFields in browser
@@ -81,7 +74,6 @@ export class Main {
     document.getElementById(this.data.templateButtons.submitId).focus();
   }
   gen() {
-
     let password = "";
     let output = "";
     let length = document.getElementById(this.data.templateFields.lengthId).value;
@@ -91,7 +83,6 @@ export class Main {
     let symbols = document.getElementById(this.data.templateFields.symbolsId).value;
     let amount = document.getElementById(this.data.templateFields.amountId).value;
     let save = document.getElementById(this.data.saveId).checked;
-
     if (length >= 5 && (lettersLower !== '' || lettersUpper !== '' || numbers !== '' || symbols !== '') && amount >= 1) {
       lettersLower = this.removeSpaces(lettersLower); // remove spaces
       lettersUpper = this.removeSpaces(lettersUpper); // remove spaces
@@ -103,12 +94,7 @@ export class Main {
         while (this.jPassGen.validate(password, lettersLower) === false || this.jPassGen.validate(password, lettersUpper) === false || this.jPassGen.validate(password, numbers) === false || this.jPassGen.validate(password, symbols) === false) {
           password = this.jPassGen.generate(length, characters); // generate random password
         }
-        if (i === 0) {
-          output = password;
-        }
-        else {
-          output += "\r" + password;
-        }
+        output = (i === 0) ? password : output += "\r" + password;
       }
       if (save === true) {
         let values = Object.values(this.data.templateFields);

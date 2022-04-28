@@ -15,7 +15,11 @@
           "name": "JPassGen",
           "persistence": true,
           "cookieStorage": false,
-          "reset": false
+          "reset": false,
+          "JSONAPI": {
+            "type": "localdata",
+            "id": "1"
+          }
         },
         "templateFields": {
           "lengthId": "length",
